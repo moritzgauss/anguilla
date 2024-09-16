@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anguilla Lamp - Interactive & Innovative Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Saira Extra Condensed', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            color: #333;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .description {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #666;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .header {
+            width: 100%;
+            padding: 50px 0;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            z-index: 1;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* SVG overlay */
+        .overlay-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Parallax effect */
+        .parallax {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        /* Parallax container to adjust the movement */
+        .parallax-container {
+            width: 100%;
+            height: 100%;
+            perspective: 800px;
+        }
+
+        .header:hover .overlay-svg {
+            opacity: 1;
+        }
+
+        .header:hover .parallax {
+            opacity: 1;
+        }
+
+        /* Main lamp content */
+        .lamp-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 900px;
+            width: 100%;
+            z-index: 1;
+            margin-top: 40px;
+        }
+
+        .lamp-image {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+            margin-bottom: 20px;
+            filter: grayscale(80%) contrast(120%);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lamp-details {
+            width: 100%;
+            text-align: center;
+            border-top: 2px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .lamp-details h2 {
+            font-size: 32px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .lamp-details p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555;
+            text-align: justify;
+        }
+
+        .technical-details {
+            font-size: 16px;
+            margin-top: 30px;
+            color: #777;
+            text-align: left;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .technical-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .technical-details li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .technical-details li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .technical-details li:hover {
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            transform: translateX(5px);
+            transition: all 0.3s ease;
+        }
+
+        .embossed {
+            font-size: 20px;
+            font-weight: 700;
+            color: #222;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            animation: embossed-glow 2s infinite alternate;
+        }
+
+        @keyframes embossed-glow {
+            0% {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.1);
+            }
+            100% {
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Circuit style design on background */
+        .circuit-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/M9ICV5N.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: -1;
+            transform: translateY(0px);
+        }
+
+        /* Parallax effect for the background */
+        body:hover .circuit-lines {
+            transform: translateY(20px);
+            transition: transform 0.8s ease;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="circuit-lines"></div>
+
+    <h1>The Anguilla Lamp</h1>
+    <p class="description">An innovative lamp with a low-voltage lighting system and sleek modern design.</p>
+
+    <!-- Interactive Header Section -->
+    <div class="header" id="header">
+        <div class="logo-container">
+            <img src="https://github.com/moritzgauss/anguilla/blob/main/material/IMG_1391.JPG?raw=true" alt="Anguilla Lamp Logo">
+            <img src="https://github.com/moritzgauss/anguilla/blob/main/material/Element%201.svg?raw=true" class="overlay-svg" alt="Element SVG">
+            <div class="parallax-container">
+                <img src="https://github.com/moritzgauss/anguilla/blob/main/material/IMG_1400.JPG?raw=true" class="parallax" alt="Parallax Image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Lamp Content -->
+    <div class="lamp-container">
+        <img class="lamp-image" src="https://i.pinimg.com/564x/c0/c8/89/c0c889710e1cd2268554f9a7f9145a6b.jpg" alt="Anguilla Lamp">
+        
+        <div class="lamp-details">
+            <h2>Innovative Low-Voltage Lighting</h2>
+            <p>This lamp is a prime example of a low-voltage lighting system, operating without conventional wiring to the light source. The 12V current is conducted through the metallic frame, completely eliminating the need for external electrical cables. The lamp’s frame is made entirely of conductive metal, providing an elegant and minimalist design solution.</p>
+            <p>It uses a GU10 to GU5.3 adapter with a GU5.3 LED and an LED transformer to convert 230V to 12V. Made from flat steel (1.5mm) and aluminum sheet (2mm), the lamp achieves a sleek, industrial yet modern look that fits perfectly into any space.</p>
+        </div>
+
+        <div class="embossed">Embossed Metal Design</div>
+
+        <div class="technical-details">
+            <ul>
+                <li>Low-voltage system (6V, 12V, 24V)</li>
+                <li>Conductive metal frame</li>
+                <li>GU10 to GU5.3 adapter</li>
+                <li>LED Transformer (230V to 12V)</li>
+                <li>Materials: Flat Steel (1.5mm), Aluminum Sheet (2mm)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2024 Anguilla Innovations. All rights reserved.
+    </div>
+
+    <script>
+        // Parallax effect based on mouse movement
+        const header = document.getElementById('header');
+        const parallaxImage = document.querySelector('.parallax');
+
+        header.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 90;
+            const y = (window.innerHeight - e.pageY * 2) / 90;
+
+            parallaxImage.style.transform = `translateX(${x}px) translateY(${y}px)`;
+        });
+
+        // Reset position when the mouse leaves the header
+        header.addEventListener('mouseleave', () => {
+            parallaxImage.style.transform = `translateX(0px) translateY(0px)`;
+        });
+    </script>
+
+</body>
+</html>
